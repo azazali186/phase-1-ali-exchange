@@ -1,0 +1,35 @@
+http:
+  port: 8082
+admin:
+  port: 9876
+  host: localhost
+apiEndpoints:
+  users:
+    host: localhost
+    paths: '/api/v1/users/*'
+serviceEndpoints:
+  userService:
+    url: 'http://localhost:3000'
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+pipelines:
+  default:
+    apiEndpoints:
+      - users
+    policies:
+      - cors:
+          - action:
+              origin: 
+                - 'http://localhost:3000'
+                - 'http://localhost:7000'
+      - proxy:
+          - action:
+              serviceEndpoint: userService
+              changeOrigin: true
