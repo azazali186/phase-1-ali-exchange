@@ -1,15 +1,13 @@
 http:
-  port: 8082
+  port: 8000
 admin:
   port: 9876
-  host: localhost
 apiEndpoints:
   users:
-    host: localhost
-    paths: '/api/v1/users/*'
+    paths: '/api/v1/auth-service/*'
 serviceEndpoints:
   userService:
-    url: 'http://localhost:3000'
+    url: 'http://user-service:3001'
 policies:
   - basic-auth
   - cors
